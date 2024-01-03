@@ -1,38 +1,171 @@
-.App {
-  text-align: center;
-}
+/* * {
+  background-color: #f0f0f0;
+  cursor: default;
+} */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.two-column-container {
   display: flex;
   flex-direction: column;
+  height: auto;
+  width: 100%;
+}
+
+.column1 {
+  width: 95%;
+  height: 110px;
+  border: 2px solid gray;
+  border-radius: 20px;
+  margin: 20px auto;
+  padding: 5px 40px;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: row;
 }
 
-.App-link {
-  color: #61dafb;
+.column2 {
+  width: 95%;
+  margin: -31px 36px;
+
+  height: auto;
+  /* height: 700px; */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.data {
+  height: 69%;
+  /* display: flex; */
+  align-items: center;
+
+  overflow-y: auto;
+  /* max-height: 1596px; */
+}
+.dataList {
+  overflow-y: auto;
+  max-height: 350px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.anticon {
+  display: inline-flex;
+  align-items: center;
+  color: black;
+  font-style: normal;
+  line-height: 0;
+  text-align: center;
+  text-transform: none;
+  vertical-align: -0.125em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.inputField {
+  /* border: none;
+  border-bottom: 1px solid black; */
+  
+  border: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.3s ease;
+  animation: blinkBorder 1s linear infinite;
+}
+@keyframes blinkBorder {
+  0% {
+    border-color: transparent;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    border-color: #3da5b5;
   }
+  100% {
+    border-color: transparent;
+  }
+}
+.inputField.edit {
+  border-bottom: 1px solid #3da5b5;
+  width: 50%;
+  text-align: center;
+  color: #000;
+  font-family: Roboto;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.96px;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  height: 390px;
+  overflow-y: auto; /* Add this to enable horizontal scrolling */
+}
+
+.custom-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.custom-table th,
+.custom-table td {
+  border: 1px solid #ddd;
+  padding: 8px 5px;
+  text-align: center;
+  min-width: 50px; /* Set a minimum width for cells to avoid collapsing */
+  font-size: 10px;
+}
+
+.custom-table th {
+  background-color: #f0f0f0;
+}
+
+/* Style the progress bar */
+.ant-progress {
+  margin-top: 10px;
+}
+
+/* Style the file upload container */
+.upload-container {
+  margin-top: 20px;
+}
+
+/* Style the edit/save button */
+.ant-btn {
+  margin-right: 5px;
+}
+
+.values {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  font-size: 11px;
+}
+
+.values > *:nth-child(even)::before {
+  content: ": ";
+}
+
+.editButton {
+  width: 195%;
+  margin: 10px 10px 10px 10px;
+}
+img {
+  border-radius: 50%;
+}
+
+.page-container {
+  max-height: 437px;
+  overflow-y: auto; 
+  padding: 10px; 
 }
