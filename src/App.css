@@ -75,7 +75,7 @@
 .inputField {
   /* border: none;
   border-bottom: 1px solid black; */
-  
+
   border: none;
   border-bottom: 1px solid transparent;
   transition: border-bottom 0.3s ease;
@@ -94,9 +94,9 @@
 }
 .inputField.edit {
   border-bottom: 1px solid #3da5b5;
-  width: 50%;
+  width: 100%;
   text-align: center;
-  color: #000;
+  color: #000000;
   font-family: Roboto;
   font-size: 10px;
   font-style: normal;
@@ -121,7 +121,7 @@
 .custom-table th,
 .custom-table td {
   border: 1px solid #ddd;
-  padding: 8px 5px;
+  padding: 8px;
   text-align: center;
   min-width: 50px; /* Set a minimum width for cells to avoid collapsing */
   font-size: 10px;
@@ -166,6 +166,11 @@ img {
 
 .page-container {
   max-height: 437px;
-  overflow-y: auto; 
-  padding: 10px; 
+  overflow-y: auto;
+  padding: 10px;
+}
+.rpv-default-layout__main {
+  display: flex;
+  height: 458px;
+  position: relative;
 }

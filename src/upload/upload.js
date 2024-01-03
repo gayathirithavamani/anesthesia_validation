@@ -108,8 +108,9 @@ function UploadFile() {
       ...updatedData[editMode],
       ...editedValuesRow,
     };
-    // console.log(updatedData);
+
     setEditedRows(updatedData);
+
     try {
       const response = await fetch(
         "https://anesthesia.encipherhealth.com/api/v1/patient-record/update",
@@ -122,7 +123,8 @@ function UploadFile() {
         }
       );
       if (response.ok) {
-        setEditMode(false);
+        setSelectRowData(editedValuesRow);
+        setEditMode(null);
       } else {
         console.error("Error saving data:", response.statusText);
       }
@@ -301,7 +303,8 @@ function UploadFile() {
 
   useEffect(() => {
     fetchFileList();
-  }, []);
+    fetchDataTable();
+  }, [data]);
   useEffect(() => {
     if (progress >= 100) {
       setTimeout(() => {
@@ -313,13 +316,24 @@ function UploadFile() {
     }
   }, [progress]);
   //tables view api
-  useEffect(() => {
-    fetch(`https://anesthesia.encipherhealth.com/api/v1/anesthesia/${fileID}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data);
-      });
-  }, [fileID]);
+  // useEffect(() => {
+  //   fetch(`https://anesthesia.encipherhealth.com/api/v1/anesthesia/${fileID}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setData(data);
+  //     });
+  // }, [fileID]);
+  const fetchDataTable = async () => {
+    try {
+      const response = await fetch(
+        `https://anesthesia.encipherhealth.com/api/v1/anesthesia/${fileID}`
+      );
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   // sort by order
   const sortTableByAsc = async () => {
     try {
@@ -355,8 +369,7 @@ function UploadFile() {
       console.error("Error fetching sorted data:", error);
     }
   };
-  console.log(data, "data");
-  console.log(selectRowData, "rowData");
+  console.log(editedValues, "table");
 
   return (
     <div className="two-column-container">
@@ -381,12 +394,7 @@ function UploadFile() {
             height: "100%",
           }}
         >
-          <Button
-            style={{ marginTop: "10px" }}
-            onClick={openPdfViewer}
-            // MultipleViewersSamePageExample={true}
-            // selectRowData={false}
-          >
+          <Button style={{ marginTop: "10px" }} onClick={openPdfViewer}>
             PDF view
           </Button>
         </div>
@@ -589,7 +597,9 @@ function UploadFile() {
 
                         <td
                           onClick={() => {
-                            openPdfViewer(item.pageNo - 1);
+                            if (editIndex !== index) {
+                              openPdfViewer(item.pageNo - 1);
+                            }
                           }}
                           style={{ cursor: "pointer" }}
                         >
@@ -909,7 +919,7 @@ function UploadFile() {
           height="auto"
         >
           <div style={{ display: "flex", width: "100%" }}>
-            <div style={{ width: "70%" }}>
+            <div style={{ width: "75%" }}>
               {/* Your PDF viewer component */}
               <MultipleViewersSamePageExample
                 fileID={fileID}
@@ -918,7 +928,7 @@ function UploadFile() {
             </div>
             <div
               style={{
-                width: "30%",
+                width: "25%",
                 padding: "10px",
                 display: "flex",
                 justifyContent: "space-between",
@@ -958,13 +968,7 @@ function UploadFile() {
                     )} */}
 
                     <div>Patient Name</div>
-                    {/* {editMode ?(
-                      <input 
-                      type="text"
-                      value={editedValuesRow.paientname}
-                      onChange={}
-                      />
-                    )} */}
+
                     {editMode ? (
                       <input
                         type="text"
